@@ -1,34 +1,35 @@
-'use server';
-
-import { cookies } from 'next/headers';
+import { getCookie, setCookie } from 'cookies-next';
 import { getMovieDetails } from './movies';
 
-export const addToWatchlist = async (movieId: number) => {
-    const cookieStore = await cookies();
-    const watchlist = await getWatchlist();
+export const addToWatchlist = (movieId: number) => {
+    const watchlist = getWatchlist();
 
     if (!watchlist.includes(movieId)) {
         watchlist.push(movieId);
-        cookieStore.set('watchlist', JSON.stringify(watchlist));
+        console.log('adding to watchlist', watchlist);
+
+        setCookie('watchlist', JSON.stringify(watchlist), {
+            maxAge: 10 * 24 * 60 * 60, // 10 days
+        });
     }
 };
 
-export const removeFromWatchlist = async (movieId: number) => {
-    const cookieStore = await cookies();
-    const watchlist = await getWatchlist();
+export const removeFromWatchlist = (movieId: number) => {
+    const watchlist = getWatchlist();
 
     const updatedWatchlist = watchlist.filter((id) => id !== movieId);
-    cookieStore.set('watchlist', JSON.stringify(updatedWatchlist));
+    console.log('removing from watchlist', updatedWatchlist);
+    setCookie('watchlist', JSON.stringify(updatedWatchlist), {
+        maxAge: 10 * 24 * 60 * 60, // 10 days
+    });
 };
 
-export const getWatchlist = async (): Promise<number[]> => {
-    const cookieStore = await cookies();
-
-    const watchlistCookie = cookieStore.get('watchlist');
-    return watchlistCookie ? JSON.parse(watchlistCookie.value) : [];
+export const getWatchlist = (): number[] => {
+    const cookieNext = getCookie('watchlist');
+    return cookieNext ? JSON.parse(cookieNext) : [];
 };
 
 export const getWatchlistProducts = async () => {
-    const watchlist = await getWatchlist();
+    const watchlist = getWatchlist();
     return Promise.all(watchlist.map((id) => getMovieDetails(String(id))));
 };

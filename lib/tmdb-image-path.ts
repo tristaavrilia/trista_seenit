@@ -14,7 +14,7 @@ export const generateTmdbImagePath = (
     path?: string | null,
     width: ImageSize = 500,
 ) => {
-    if (!path) return '/placeholder.svg';
+    if (!path) return '/images/placeholder.svg';
 
     return `https://image.tmdb.org/t/p/w${width}${path}`;
 };

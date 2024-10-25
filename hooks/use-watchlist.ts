@@ -3,6 +3,7 @@ import {
     getWatchlist,
     removeFromWatchlist,
 } from '@/actions/watchlist';
+import { getCookie, setCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
 
 interface Props {

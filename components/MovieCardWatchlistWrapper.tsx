@@ -41,7 +41,7 @@ const MovieCardWatchlistWrapper = ({
             <Button
                 variant="outline"
                 size="icon"
-                className="absolute top-3 right-3 md:opacity-0 group-hover/wrapper:opacity-100 transition-all z-[1]"
+                className="absolute top-3 right-3 md:opacity-0 group-hover/wrapper:opacity-100 transition-all z-[1] rounded-full"
                 onClick={handleClick}
             >
                 <FaHeart color="red" />

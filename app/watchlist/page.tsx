@@ -1,9 +1,25 @@
+'use client';
 import { getWatchlistProducts } from '@/actions/watchlist';
 import MovieCard from '@/components/MovieCard';
 import MovieCardWatchlistWrapper from '@/components/MovieCardWatchlistWrapper';
+import { TMovie } from '@/lib/schemas/movie-schemas';
+import { useEffect, useState } from 'react';
 
-const WatchlistPage = async () => {
-    const watchlist = await getWatchlistProducts();
+const WatchlistPage = () => {
+    const [watchlist, setWatchlist] = useState<TMovie[]>([]);
+
+    useEffect(() => {
+        const fetchWatchlist = async () => {
+            try {
+                const watchlist = await getWatchlistProducts();
+                setWatchlist(watchlist);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchWatchlist();
+    }, []);
 
     return (
         <div className="container">
