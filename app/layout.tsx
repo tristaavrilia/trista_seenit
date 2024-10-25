@@ -4,7 +4,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { ThemeProvider } from '@/components/layout/ThemeProvider';
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from 'react-hot-toast';
 
 const openSans = Open_Sans({
     weight: ['300', '400', '500', '600', '700'],
@@ -37,7 +37,7 @@ export default function RootLayout({
                         {children}
                     </main>
 
-                    <Toaster />
+                    <Toaster position="bottom-center" />
                     <Footer />
                 </ThemeProvider>
             </body>

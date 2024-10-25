@@ -21,6 +21,8 @@ const WatchlistPage = () => {
         fetchWatchlist();
     }, []);
 
+    console.log(watchlist);
+
     return (
         <div className="container">
             <h1 className="text-xl font-bold mb-6">Your Watchlist</h1>

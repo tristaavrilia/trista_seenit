@@ -1,9 +1,9 @@
 'use client';
-import { toast } from '@/hooks/use-toast';
 import { useWatchlist } from '@/hooks/use-watchlist';
 import React, { ReactNode } from 'react';
 import { Button } from './ui/button';
 import { FaHeart } from 'react-icons/fa6';
+import toast from 'react-hot-toast';
 
 const MovieCardWatchlistWrapper = ({
     movieId,
@@ -25,10 +25,7 @@ const MovieCardWatchlistWrapper = ({
             await handleRemoveFromWishlist();
         } catch (error) {
             setIsInWatchlist(true);
-            toast({
-                title: 'Error updating watchlist',
-                variant: 'destructive',
-            });
+            toast('Error updating watchlist');
         }
     };
 

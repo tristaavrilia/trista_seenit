@@ -1,13 +1,12 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/hooks/use-toast';
 import { useWatchlist } from '@/hooks/use-watchlist';
 import { cn } from '@/lib/utils';
+import toast from 'react-hot-toast';
 import { FaHeart, FaRegHeart } from 'react-icons/fa6';
 
 export default function AddToWatchlistButton({ movieId }: { movieId: number }) {
-    const { toast } = useToast();
     const {
         isInWatchlist,
         setIsInWatchlist,
@@ -24,18 +23,15 @@ export default function AddToWatchlistButton({ movieId }: { movieId: number }) {
             if (isInWatchlist) {
                 setIsInWatchlist(false);
                 await handleRemoveFromWishlist();
-                toast({ title: 'Removed from watchlist' });
+                toast('Removed from watchlist');
             } else {
                 setIsInWatchlist(true);
                 await handleAddToWishlist();
-                toast({ title: 'Added to watchlist' });
+                toast('Added to watchlist');
             }
         } catch (error) {
             setIsInWatchlist(previousWatchlistState);
-            toast({
-                title: 'Error updating watchlist',
-                variant: 'destructive',
-            });
+            toast.error('Error updating watchlist');
         }
     };
 
