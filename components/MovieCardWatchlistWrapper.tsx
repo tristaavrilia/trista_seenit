@@ -1,6 +1,6 @@
 'use client';
 import { toast } from '@/hooks/use-toast';
-import { useWishlist } from '@/hooks/use-wishlist';
+import { useWatchlist } from '@/hooks/use-watchlist';
 import React, { ReactNode } from 'react';
 import { Button } from './ui/button';
 import { FaHeart } from 'react-icons/fa6';
@@ -13,7 +13,7 @@ const MovieCardWatchlistWrapper = ({
     children: ReactNode;
 }) => {
     const { isInWatchlist, setIsInWatchlist, handleRemoveFromWishlist } =
-        useWishlist({
+        useWatchlist({
             movieId,
             isInWishlist: true,
             watch: false,

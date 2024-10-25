@@ -15,6 +15,7 @@ export const movieSchema = z.object({
 export type TMovie = z.infer<typeof movieSchema>;
 
 export const movieDetailsSchema = movieSchema.extend({
+    genre_ids: z.undefined(),
     tagline: z.string().optional(),
     genres: z.array(
         z.object({

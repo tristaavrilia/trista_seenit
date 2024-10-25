@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 interface Props extends ImageProps {}
 
-const errorImage = '/movie-placeholder.svg';
+const errorImage = '/placeholder.png';
 
 const LazyImage = ({ className, alt, ...props }: Props) => {
     const [error, setError] = useState(false);
@@ -20,6 +20,7 @@ const LazyImage = ({ className, alt, ...props }: Props) => {
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/+F9PQAI8wNPvd7POQAAAABJRU5ErkJggg=="
             onError={function (e) {
                 if (error) return;
+
                 e.currentTarget.src = errorImage;
                 e.currentTarget.srcset = '';
                 setError(true);

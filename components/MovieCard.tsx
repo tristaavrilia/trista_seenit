@@ -2,14 +2,15 @@ import Link from 'next/link';
 import LazyImage from './LazyImage';
 import { FaStar } from 'react-icons/fa6';
 import { TMovie } from '@/lib/schemas/movie-schemas';
+import { generateTmdbImagePath } from '@/lib/tmdb-image-path';
 
-export default function MovieCard({ movie }: { movie: TMovie }) {
+const MovieCard = ({ movie }: { movie: TMovie }) => {
     return (
         <div className="group">
             <div className="aspect-[2/3] overflow-hidden rounded-lg">
                 <Link href={`/movies/${movie.id}`}>
                     <LazyImage
-                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                        src={generateTmdbImagePath(movie.poster_path)}
                         alt={movie.title}
                         width={300}
                         height={450}
@@ -39,4 +40,6 @@ export default function MovieCard({ movie }: { movie: TMovie }) {
             </Link>
         </div>
     );
-}
+};
+
+export default MovieCard;

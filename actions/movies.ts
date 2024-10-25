@@ -8,29 +8,40 @@ import {
 } from '@/lib/schemas/movie-schemas';
 import { notFound } from 'next/navigation';
 
+const API_KEY = process.env.TMDB_API_KEY;
+
 export const getMovies = async (page: number): Promise<TMovie[]> => {
     const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/movies?page=${page}`,
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=${page}`,
     );
+
     if (!res.ok) throw new Error('Failed to fetch movies');
-    return res.json() as Promise<TMovie[]>;
+    const data = await res.json();
+    return data.results as Promise<TMovie[]>;
 };
 
 export const searchMovies = async (query: string, page: number) => {
+    if (!query || query.length < 3) {
+        throw new Error('Query is too short');
+    }
+
     const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/search?query=${query}&page=${page}`,
+        `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`,
         {
             next: { revalidate: 60 },
         },
     );
+
     if (!res.ok) throw new Error('Failed to fetch movies');
-    return res.json() as Promise<TMovie[]>;
+
+    const data = await res.json();
+    return data.results as Promise<TMovie[]>;
 };
 
 export const getMovieDetails = async (id: string) => {
     const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_API_KEY}`,
-        { next: { revalidate: 60 } },
+        { cache: 'force-cache', next: { revalidate: 60 } },
     );
     if (!res.ok) notFound();
     const data = await res.json();

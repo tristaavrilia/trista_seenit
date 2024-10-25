@@ -2,7 +2,7 @@ import { getMovies } from '@/actions/movies';
 import InfiniteMovies from '@/components/InfiniteMovies';
 import MovieCard from '@/components/MovieCard';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 const Home = async () => {
     const movies = await getMovies(1);

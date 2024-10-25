@@ -6,6 +6,7 @@ import SwiperRef from 'swiper';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 import { Button } from './ui/button';
 import { TCredits } from '@/lib/schemas/movie-schemas';
+import { generateTmdbImagePath } from '@/lib/tmdb-image-path';
 
 interface Props {
     cast: TCredits['cast'];
@@ -44,7 +45,10 @@ const MovieActorsSection = ({ cast }: Props) => {
                         <SwiperSlide key={actor.id} className="!w-auto">
                             <div className="flex-shrink-0 w-32">
                                 <LazyImage
-                                    src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+                                    src={generateTmdbImagePath(
+                                        actor.profile_path,
+                                        200,
+                                    )}
                                     alt={actor.name}
                                     width={200}
                                     height={300}

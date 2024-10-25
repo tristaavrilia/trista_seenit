@@ -15,7 +15,7 @@ export default function Header() {
             <div className="container mx-auto px-4 py-4 flex items-center justify-between">
                 <Link
                     href="/"
-                    className="text-xl font-medium size-10 flex items-center justify-center border rounded-full"
+                    className="text-xl font-medium size-10 flex items-center justify-center border-[3px] rounded-full"
                 >
                     M
                 </Link>

@@ -11,12 +11,7 @@ import {
     getMovieDetails,
     getMovieRecommendations,
 } from '@/actions/movies';
-import {
-    TCredits,
-    TMovieDetails,
-    TRecommendations,
-} from '@/lib/schemas/movie-schemas';
-import ErrorMessage from '@/components/ErrorMessage';
+import { generateTmdbImagePath } from '@/lib/tmdb-image-path';
 
 export const revalidate = 60;
 export const dynamic = 'force-static';
@@ -28,34 +23,27 @@ export default async function MoviePage({
 }) {
     const movieId = (await params).id;
 
-    let movie: TMovieDetails,
-        credits: TCredits,
-        recommendations: TRecommendations;
-
-    try {
-        [movie, credits, recommendations] = await Promise.all([
-            getMovieDetails(movieId),
-            getMovieCredits(movieId),
-            getMovieRecommendations(movieId),
-        ]);
-    } catch (error) {
-        return (
-            <ErrorMessage message="Some thing went wrong. Please look at the server logs for better understanding." />
-        );
-    }
+    const [movie, credits, recommendations] = await Promise.all([
+        getMovieDetails(movieId),
+        getMovieCredits(movieId),
+        getMovieRecommendations(movieId),
+    ]);
 
     return (
         <>
             <section
-                className="bg-cover bg-center bg-no-repeat py-8 text-white mb-8"
+                className="bg-cover bg-center bg-no-repeat py-8 text-white mb-8 -mt-4"
                 style={{
-                    backgroundImage: `linear-gradient(#000000bb, #000000bb), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+                    backgroundImage: `linear-gradient(#000000bb, #000000bb), url(${generateTmdbImagePath(
+                        movie.backdrop_path,
+                        1280,
+                    )})`,
                 }}
             >
                 <div className="container flex flex-col md:flex-row gap-8">
                     <div className="w-full md:max-w-[300px]">
                         <LazyImage
-                            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                            src={generateTmdbImagePath(movie.poster_path)}
                             alt={movie.title}
                             width={500}
                             height={750}

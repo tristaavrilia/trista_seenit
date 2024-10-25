@@ -11,7 +11,7 @@ interface Props {
     watch?: boolean;
 }
 
-export const useWishlist = ({
+export const useWatchlist = ({
     movieId,
     isInWishlist = false,
     watch = true,

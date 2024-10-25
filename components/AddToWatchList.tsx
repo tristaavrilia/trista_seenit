@@ -2,25 +2,34 @@
 
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { useWishlist } from '@/hooks/use-wishlist';
+import { useWatchlist } from '@/hooks/use-watchlist';
 
 export default function AddToWatchlistButton({ movieId }: { movieId: number }) {
     const { toast } = useToast();
-    const { isInWatchlist, handleAddToWishlist, handleRemoveFromWishlist } =
-        useWishlist({
-            movieId,
-        });
+    const {
+        isInWatchlist,
+        setIsInWatchlist,
+        handleAddToWishlist,
+        handleRemoveFromWishlist,
+    } = useWatchlist({
+        movieId,
+    });
 
     const handleClick = async () => {
+        const previousWatchlistState = isInWatchlist;
+
         try {
             if (isInWatchlist) {
+                setIsInWatchlist(false);
                 await handleRemoveFromWishlist();
                 toast({ title: 'Removed from watchlist' });
             } else {
+                setIsInWatchlist(true);
                 await handleAddToWishlist();
                 toast({ title: 'Added to watchlist' });
             }
         } catch (error) {
+            setIsInWatchlist(previousWatchlistState);
             toast({
                 title: 'Error updating watchlist',
                 variant: 'destructive',

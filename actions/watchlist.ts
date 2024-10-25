@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
+import { getMovieDetails } from './movies';
 
 export const addToWatchlist = async (movieId: number) => {
     const cookieStore = await cookies();
@@ -32,4 +33,9 @@ export const getWatchlist = async (): Promise<number[]> => {
 
     const watchlistCookie = cookieStore.get('watchlist');
     return watchlistCookie ? JSON.parse(watchlistCookie.value) : [];
+};
+
+export const getWatchlistProducts = async () => {
+    const watchlist = await getWatchlist();
+    return Promise.all(watchlist.map((id) => getMovieDetails(String(id))));
 };
