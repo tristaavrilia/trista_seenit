@@ -6,9 +6,18 @@ import { useTheme } from 'next-themes';
 import { FaHeart } from 'react-icons/fa6';
 import { LuMoonStar, LuSun } from 'react-icons/lu';
 import SearchForm from '../forms/SearchForm';
+import { useMemo } from 'react';
 
 export default function Header() {
-    const { theme, setTheme } = useTheme();
+    const { theme, setTheme, systemTheme } = useTheme();
+
+    const currentTheme = useMemo(() => {
+        if (theme === 'system') {
+            return systemTheme;
+        }
+
+        return theme;
+    }, [theme, systemTheme]);
 
     return (
         <header className="border-b mb-4 sticky top-0 left-0 z-[3] bg-background">
@@ -34,10 +43,10 @@ export default function Header() {
                         variant="ghost"
                         size="icon"
                         onClick={() =>
-                            setTheme(theme === 'dark' ? 'light' : 'dark')
+                            setTheme(currentTheme === 'dark' ? 'light' : 'dark')
                         }
                     >
-                        {theme === 'dark' ? <LuSun /> : <LuMoonStar />}
+                        {currentTheme === 'dark' ? <LuSun /> : <LuMoonStar />}
                         <span className="sr-only">Toggle theme</span>
                     </Button>
                 </nav>

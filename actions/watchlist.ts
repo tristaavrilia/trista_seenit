@@ -1,6 +1,5 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { getMovieDetails } from './movies';
 
@@ -11,9 +10,6 @@ export const addToWatchlist = async (movieId: number) => {
     if (!watchlist.includes(movieId)) {
         watchlist.push(movieId);
         cookieStore.set('watchlist', JSON.stringify(watchlist));
-
-        revalidatePath('/watchlist');
-        revalidatePath(`/movies/${movieId}`);
     }
 };
 
@@ -23,9 +19,6 @@ export const removeFromWatchlist = async (movieId: number) => {
 
     const updatedWatchlist = watchlist.filter((id) => id !== movieId);
     cookieStore.set('watchlist', JSON.stringify(updatedWatchlist));
-
-    revalidatePath('/watchlist');
-    revalidatePath(`/movies/${movieId}`);
 };
 
 export const getWatchlist = async (): Promise<number[]> => {
