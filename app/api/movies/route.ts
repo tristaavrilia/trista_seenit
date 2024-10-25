@@ -8,7 +8,6 @@ export const GET = async (request: Request) => {
 
     const res = await fetch(
         `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=${page}`,
-        { next: { revalidate: 3600 } },
     );
 
     const data = await res.json();

@@ -28,7 +28,6 @@ export const removeFromWatchlist = async (movieId: number) => {
 };
 
 export const getWatchlist = async (): Promise<number[]> => {
-    console.log('getWatchlist');
     const cookieStore = await cookies();
 
     const watchlistCookie = cookieStore.get('watchlist');

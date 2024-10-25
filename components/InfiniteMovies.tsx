@@ -1,12 +1,12 @@
 'use client';
 import { getMovies } from '@/actions/movies';
-import { Movie } from '@/types';
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import MovieCard from './MovieCard';
+import { TMovie } from '@/lib/schemas/movie-schemas';
 
 const InfiniteMovies = () => {
-    const [movies, setMovies] = useState<Movie[]>([]);
+    const [movies, setMovies] = useState<TMovie[]>([]);
     const [page, setPage] = useState(1);
     const [ref, inView] = useInView();
 
@@ -26,7 +26,7 @@ const InfiniteMovies = () => {
 
     return (
         <>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6 mt-3 md:mt-6">
                 {movies.map((movie) => (
                     <MovieCard key={movie.id} movie={movie} />
                 ))}

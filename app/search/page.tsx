@@ -4,13 +4,13 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
 import MovieCard from '@/components/MovieCard';
-import { Movie } from '@/types';
 import { searchMovies } from '@/actions/movies';
+import { TMovie } from '@/lib/schemas/movie-schemas';
 
 export default function SearchPage() {
     const searchParams = useSearchParams();
     const query = searchParams.get('query') || '';
-    const [movies, setMovies] = useState<Movie[]>([]);
+    const [movies, setMovies] = useState<TMovie[]>([]);
     const [page, setPage] = useState(0);
     const [ref, inView] = useInView();
 

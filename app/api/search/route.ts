@@ -16,7 +16,6 @@ export async function GET(request: Request) {
 
     const res = await fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`,
-        { next: { revalidate: 60 } },
     );
 
     const data = await res.json();

@@ -1,14 +1,14 @@
 'use client';
-import { Credits } from '@/types';
 import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import LazyImage from './LazyImage';
 import SwiperRef from 'swiper';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 import { Button } from './ui/button';
+import { TCredits } from '@/lib/schemas/movie-schemas';
 
 interface Props {
-    cast: Credits['cast'];
+    cast: TCredits['cast'];
 }
 
 const MovieActorsSection = ({ cast }: Props) => {

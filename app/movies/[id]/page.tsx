@@ -85,7 +85,7 @@ export default async function MoviePage({
 
                         <div className="flex gap-2 items-center text-sm !mt-0">
                             {movie.genres.map((genre, idx) => (
-                                <>
+                                <div key={genre.id}>
                                     <span
                                         key={genre.id}
                                         className="rounded text-sm"
@@ -95,7 +95,7 @@ export default async function MoviePage({
                                     {idx < movie.genres.length - 1 && (
                                         <span className="size-1 bg-gray-500 rounded-full"></span>
                                     )}
-                                </>
+                                </div>
                             ))}
                         </div>
 
