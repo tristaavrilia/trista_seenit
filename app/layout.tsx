@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import './globals.css';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { ThemeProvider } from '@/components/ThemeProvider';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import { ThemeProvider } from '@/components/layout/ThemeProvider';
 import { Toaster } from '@/components/ui/toaster';
 
 const openSans = Open_Sans({

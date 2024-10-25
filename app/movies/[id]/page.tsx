@@ -13,10 +13,9 @@ import {
 } from '@/actions/movies';
 import {
     TCredits,
-    TMovie,
     TMovieDetails,
     TRecommendations,
-} from '@/lib/schemas';
+} from '@/lib/schemas/movie-schemas';
 import ErrorMessage from '@/components/ErrorMessage';
 
 export const revalidate = 60;

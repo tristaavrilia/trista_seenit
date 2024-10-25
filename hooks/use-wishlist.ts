@@ -5,8 +5,18 @@ import {
 } from '@/actions/watchlist';
 import { useEffect, useState } from 'react';
 
-export const useWishlist = (movieId: number) => {
-    const [isInWatchlist, setIsInWatchlist] = useState(false);
+interface Props {
+    movieId: number;
+    isInWishlist?: boolean;
+    watch?: boolean;
+}
+
+export const useWishlist = ({
+    movieId,
+    isInWishlist = false,
+    watch = true,
+}: Props) => {
+    const [isInWatchlist, setIsInWatchlist] = useState(isInWishlist);
 
     useEffect(() => {
         const checkWatchlist = async () => {
@@ -14,7 +24,7 @@ export const useWishlist = (movieId: number) => {
             setIsInWatchlist(watchlist.includes(movieId));
         };
 
-        checkWatchlist();
+        if (watch) checkWatchlist();
     }, [movieId]);
 
     const handleAddToWishlist = async () => {

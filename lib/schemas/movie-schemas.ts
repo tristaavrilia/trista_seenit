@@ -9,14 +9,12 @@ export const movieSchema = z.object({
     release_date: z.string(),
     vote_average: z.number(),
     vote_count: z.number(),
-    genre_ids: z.array(z.number()),
     popularity: z.number(),
 });
 
 export type TMovie = z.infer<typeof movieSchema>;
 
 export const movieDetailsSchema = movieSchema.extend({
-    genre_ids: z.undefined(),
     tagline: z.string().optional(),
     genres: z.array(
         z.object({

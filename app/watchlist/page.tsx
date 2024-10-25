@@ -1,19 +1,13 @@
+import { getMovieDetails } from '@/actions/movies';
 import { getWatchlist } from '@/actions/watchlist';
 import MovieCard from '@/components/MovieCard';
-import { Movie } from '@/types';
-
-async function getMovieDetails(id: number): Promise<Movie> {
-    const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_API_KEY}`,
-        { next: { revalidate: 3600 } },
-    );
-    if (!res.ok) throw new Error('Failed to fetch movie details');
-    return res.json();
-}
+import MovieCardWatchlistWrapper from '@/components/MovieCardWatchlistWrapper';
 
 export default async function WatchlistPage() {
     const watchlist = await getWatchlist();
-    const movies = await Promise.all(watchlist.map(getMovieDetails));
+    const movies = await Promise.all(
+        watchlist.map((item) => getMovieDetails(String(item))),
+    );
 
     return (
         <div className="container">
@@ -23,7 +17,12 @@ export default async function WatchlistPage() {
             ) : (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6">
                     {movies.map((movie) => (
-                        <MovieCard key={movie.id} movie={movie} />
+                        <MovieCardWatchlistWrapper
+                            movieId={movie.id}
+                            key={movie.id}
+                        >
+                            <MovieCard movie={movie} />
+                        </MovieCardWatchlistWrapper>
                     ))}
                 </div>
             )}

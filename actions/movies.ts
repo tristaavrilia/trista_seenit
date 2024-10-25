@@ -5,7 +5,7 @@ import {
     movieDetailsSchema,
     recommendationsSchema,
     TMovie,
-} from '@/lib/schemas';
+} from '@/lib/schemas/movie-schemas';
 import { notFound } from 'next/navigation';
 
 export const getMovies = async (page: number): Promise<TMovie[]> => {

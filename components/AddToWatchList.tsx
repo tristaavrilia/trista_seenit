@@ -1,19 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-    addToWatchlist,
-    getWatchlist,
-    removeFromWatchlist,
-} from '@/actions/watchlist';
 import { useToast } from '@/hooks/use-toast';
 import { useWishlist } from '@/hooks/use-wishlist';
 
 export default function AddToWatchlistButton({ movieId }: { movieId: number }) {
     const { toast } = useToast();
     const { isInWatchlist, handleAddToWishlist, handleRemoveFromWishlist } =
-        useWishlist(movieId);
+        useWishlist({
+            movieId,
+        });
 
     const handleClick = async () => {
         try {
