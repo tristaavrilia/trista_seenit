@@ -51,9 +51,7 @@ export default async function MoviePage({
                         />
                     </div>
                     <div className="w-full md:w-2/3 space-y-4">
-                        <h1 className="text-xl md:text-3xl font-bold">
-                            {movie.title}
-                        </h1>
+                        <h1 className="text-2xl font-bold">{movie.title}</h1>
                         <div className="flex items-center gap-2">
                             <span className="inline-flex gap-2 items-center text-sm">
                                 <FaStar size={14} className="text-orange-500" />

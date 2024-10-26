@@ -37,19 +37,10 @@ export default function AddToWatchlistButton({ movieId }: { movieId: number }) {
 
     return (
         <Button
-            className={cn(
-                'bg-white text-black flex items-center gap-2 hover:bg-gray-300 group transition-all',
-            )}
+            className="text-primary-foreground bg-primary"
             onClick={handleClick}
         >
-            <span
-                className={cn('group-hover:text-rose-500 transition-all', {
-                    'text-rose-500': isInWatchlist,
-                })}
-            >
-                {isInWatchlist ? <FaHeart /> : <FaRegHeart />}
-            </span>
-            <span>Watchlist</span>
+            {isInWatchlist ? 'Remove from Watchlist' : 'Add to Watchlist'}
         </Button>
     );
 }
