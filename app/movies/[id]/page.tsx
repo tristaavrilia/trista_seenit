@@ -6,6 +6,8 @@ import { getMovies, getMovieCredits, getMovieDetails } from '@/actions/movies';
 import { generateTmdbImagePath } from '@/lib/tmdb-image-path';
 import { getImageProps } from 'next/image';
 import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Suspense } from 'react';
 
 const RecommendationSection = dynamic(
     () => import('@/components/RecommendationSection'),
@@ -124,8 +126,12 @@ export default async function MoviePage({ params }: Params) {
                 </div>
             </section>
             <div className="container space-y-8">
-                <MovieActorsSection cast={credits.cast} />
-                <RecommendationSection movieId={movieId} />
+                <Suspense fallback={<Skeleton className="h-[300px] w-full" />}>
+                    <MovieActorsSection cast={credits.cast} />
+                </Suspense>
+                <Suspense fallback={<Skeleton className="h-[300px] w-full" />}>
+                    <RecommendationSection movieId={movieId} />
+                </Suspense>
             </div>
         </>
     );
