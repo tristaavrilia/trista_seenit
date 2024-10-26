@@ -43,7 +43,7 @@ export const getMovieDetails = async (id: string) => {
         `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_API_KEY}`,
         { next: { revalidate: 60 } },
     );
-    if (!res.ok) notFound();
+    if (!res.ok) throw new Error('Failed to fetch movie details');
     const data = await res.json();
 
     try {
@@ -60,7 +60,7 @@ export const getMovieCredits = async (id: string) => {
         `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.TMDB_API_KEY}`,
         { next: { revalidate: 60 } },
     );
-    if (!res.ok) throw new Error('Failed to fetch credits');
+    if (!res.ok) throw new Error('Failed to fetch cast data');
     const data = await res.json();
 
     try {

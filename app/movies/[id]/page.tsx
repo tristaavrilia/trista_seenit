@@ -12,6 +12,7 @@ import {
 import { generateTmdbImagePath } from '@/lib/tmdb-image-path';
 import RecommendationSection from '@/components/RecommendationSection';
 import { getImageProps } from 'next/image';
+import ErrorMessage from '@/components/ErrorMessage';
 
 interface Params {
     params: Promise<{ id: string }>;
@@ -36,7 +37,7 @@ export const generateMetadata = async ({ params }: Params) => {
     return {
         title: movie.title,
         description: movie.overview,
-        image: generateTmdbImagePath(movie.poster_path, 200),
+        image: generateTmdbImagePath(movie.poster_path, 500),
     };
 };
 
