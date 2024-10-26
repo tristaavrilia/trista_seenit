@@ -1,21 +1,17 @@
 import AddToWatchlistButton from '@/components/AddToWatchList';
 import LazyImage from '@/components/LazyImage';
+import MovieActorsSection from '@/components/MovieActorsSection';
 import { dateFormatter } from '@/lib/date-formatter';
 import { FaStar } from 'react-icons/fa6';
-import { getMovies, getMovieCredits, getMovieDetails } from '@/actions/movies';
+import {
+    getMovies,
+    getMovieCredits,
+    getMovieDetails,
+    getMovieRecommendations,
+} from '@/actions/movies';
 import { generateTmdbImagePath } from '@/lib/tmdb-image-path';
+import RecommendationSection from '@/components/RecommendationSection';
 import { getImageProps } from 'next/image';
-import dynamic from 'next/dynamic';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Suspense } from 'react';
-
-const RecommendationSection = dynamic(
-    () => import('@/components/RecommendationSection'),
-);
-
-const MovieActorsSection = dynamic(
-    () => import('@/components/MovieActorsSection'),
-);
 
 interface Params {
     params: Promise<{ id: string }>;
@@ -34,6 +30,7 @@ export const generateStaticParams = async () => {
 
 export const generateMetadata = async ({ params }: Params) => {
     const movieId = (await params).id;
+
     const movie = await getMovieDetails(movieId);
 
     return {
@@ -46,9 +43,10 @@ export const generateMetadata = async ({ params }: Params) => {
 export default async function MoviePage({ params }: Params) {
     const movieId = (await params).id;
 
-    const [movie, credits] = await Promise.all([
+    const [movie, credits, recommendations] = await Promise.all([
         getMovieDetails(movieId),
         getMovieCredits(movieId),
+        getMovieRecommendations(movieId),
     ]);
 
     const optimizedBackdrop = getImageProps({
@@ -126,12 +124,10 @@ export default async function MoviePage({ params }: Params) {
                 </div>
             </section>
             <div className="container space-y-8">
-                <Suspense fallback={<Skeleton className="h-[300px] w-full" />}>
-                    <MovieActorsSection cast={credits.cast} />
-                </Suspense>
-                <Suspense fallback={<Skeleton className="h-[300px] w-full" />}>
-                    <RecommendationSection movieId={movieId} />
-                </Suspense>
+                <MovieActorsSection cast={credits.cast} />
+                <RecommendationSection
+                    recommendations={recommendations.results}
+                />
             </div>
         </>
     );

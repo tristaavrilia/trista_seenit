@@ -7,8 +7,8 @@ import LazyImage from './LazyImage';
 import SwiperRef from 'swiper';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 import { Button } from './ui/button';
-import { generateTmdbImagePath } from '@/lib/tmdb-image-path';
 import { TCredits } from '@/lib/schemas/movie-schemas';
+import { generateTmdbImagePath } from '@/lib/tmdb-image-path';
 
 interface Props {
     cast: TCredits['cast'];
