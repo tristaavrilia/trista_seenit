@@ -4,6 +4,7 @@ import MovieActorsSection from '@/components/MovieActorsSection';
 import { dateFormatter } from '@/lib/date-formatter';
 import { FaStar } from 'react-icons/fa6';
 import {
+    getMovies,
     getMovieCredits,
     getMovieDetails,
     getMovieRecommendations,
@@ -12,14 +13,33 @@ import { generateTmdbImagePath } from '@/lib/tmdb-image-path';
 import RecommendationSection from '@/components/RecommendationSection';
 import { getImageProps } from 'next/image';
 
-export const revalidate = 60;
-export const dynamic = 'force-static';
-
-export default async function MoviePage({
-    params,
-}: {
+interface Params {
     params: Promise<{ id: string }>;
-}) {
+}
+
+export const revalidate = 60;
+
+export const generateStaticParams = async () => {
+    const movies = await getMovies(1);
+    return movies.map((movie) => ({
+        params: {
+            id: movie.id.toString(),
+        },
+    }));
+};
+
+export const generateMetadata = async ({ params }: Params) => {
+    const movieId = (await params).id;
+    const movie = await getMovieDetails(movieId);
+
+    return {
+        title: movie.title,
+        description: movie.overview,
+        image: generateTmdbImagePath(movie.poster_path, 200),
+    };
+};
+
+export default async function MoviePage({ params }: Params) {
     const movieId = (await params).id;
 
     const [movie, credits, recommendations] = await Promise.all([
