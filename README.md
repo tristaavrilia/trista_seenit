@@ -1,6 +1,6 @@
 # Movie Search and Details App
 
-This project is a responsive movie search and details application built using Next.js 13/14 and the TMDB API. It features a clean user interface, infinite scrolling for movie lists, and detailed movie information, including cast and recommendations.
+This project is a responsive movie search and details application built using Next.js 15 and the TMDB API. It features a clean user interface, infinite scrolling for movie lists, and detailed movie information, including cast and recommendations.
 
 ## Table of Contents
 
