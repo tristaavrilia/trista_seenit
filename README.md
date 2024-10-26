@@ -5,7 +5,6 @@ This project is a responsive movie search and details application built using Ne
 ## Table of Contents
 
 -   [Features](#features)
--   [Technologies Used](#technologies-used)
 -   [Setup Instructions](#setup-instructions)
 -   [API Endpoints](#api-endpoints)
 -   [Live Demo](#live-demo)
@@ -18,15 +17,6 @@ This project is a responsive movie search and details application built using Ne
 -   Movie Details Page: Utilizes Server-Side Rendering (SSR) with Incremental Static - Regeneration (ISR) to show detailed information about selected movies.
 -   Watchlist Feature: Allows users to add or remove movies from their favorites or watchlist with optimistic UI, managed through server actions.
 -   Dark Mode Toggle: Optional feature to switch between light and dark themes, persisting user preferences using cookies or localStorage.
-
-## Technologies Used
-
--   Next.js 13/14
--   React
--   TMDB API
--   CSS Modules/Tailwind CSS (if applicable)
--   Zod for API Response Validation (optional)
--   React Hook Form for Search Management (optional)
 
 ## Setup Instructions
 
@@ -74,7 +64,7 @@ The application interacts with the following TMDB API endpoints:
 You can view the live application at:
 
 ```
-assignment-ngrk.vercel.app
+https://assignment-ngrk.vercel.app
 ```
 
 ## License
