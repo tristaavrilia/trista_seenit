@@ -41,7 +41,7 @@ export const searchMovies = async (query: string, page: number) => {
 export const getMovieDetails = async (id: string) => {
     const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_API_KEY}`,
-        { cache: 'force-cache', next: { revalidate: 60 } },
+        { next: { revalidate: 60 } },
     );
     if (!res.ok) notFound();
     const data = await res.json();
