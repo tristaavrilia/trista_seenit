@@ -2,9 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { useWatchlist } from '@/hooks/use-watchlist';
-import { cn } from '@/lib/utils';
 import toast from 'react-hot-toast';
-import { FaHeart, FaRegHeart } from 'react-icons/fa6';
 
 export default function AddToWatchlistButton({ movieId }: { movieId: number }) {
     const {

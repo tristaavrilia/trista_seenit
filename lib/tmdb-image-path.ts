@@ -12,7 +12,7 @@ type ImageSize =
 
 export const generateTmdbImagePath = (
     path?: string | null,
-    width: ImageSize = 500,
+    width: ImageSize = 342,
 ) => {
     if (!path) return '/placeholder.svg';
 

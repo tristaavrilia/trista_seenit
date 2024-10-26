@@ -10,11 +10,12 @@ const MovieCard = ({ movie }: { movie: TMovie }) => {
             <div className="aspect-[2/3] overflow-hidden rounded-lg">
                 <Link href={`/movies/${movie.id}`}>
                     <LazyImage
-                        src={generateTmdbImagePath(movie.poster_path)}
+                        src={generateTmdbImagePath(movie.poster_path, 200)}
                         alt={movie.title}
-                        width={300}
-                        height={450}
-                        className="object-cover aspect-[2/3] transition-transform group-hover:scale-105"
+                        width={210}
+                        height={315}
+                        quality={50}
+                        className="object-cover w-full aspect-[2/3] transition-transform group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                 </Link>

@@ -10,6 +10,7 @@ import {
 } from '@/actions/movies';
 import { generateTmdbImagePath } from '@/lib/tmdb-image-path';
 import RecommendationSection from '@/components/RecommendationSection';
+import { getImageProps } from 'next/image';
 
 export const revalidate = 60;
 export const dynamic = 'force-static';
@@ -27,24 +28,30 @@ export default async function MoviePage({
         getMovieRecommendations(movieId),
     ]);
 
+    const optimizedBackdrop = getImageProps({
+        src: generateTmdbImagePath(movie.backdrop_path, 780),
+        alt: movie.title,
+        width: 1280,
+        height: 700,
+        quality: 10,
+        priority: true,
+    }).props.src;
+
     return (
         <>
             <section
-                className="bg-cover bg-center bg-no-repeat py-8 text-white mb-8 -mt-4"
+                className="bg-cover bg-center bg-no-repeat py-8 text-white mb-8 -mt-4 relative"
                 style={{
-                    backgroundImage: `linear-gradient(#000000bb, #000000bb), url(${generateTmdbImagePath(
-                        movie.backdrop_path,
-                        1280,
-                    )})`,
+                    backgroundImage: `linear-gradient(#000000bb, #000000bb), url(${optimizedBackdrop})`,
                 }}
             >
                 <div className="container flex flex-col md:flex-row gap-8">
-                    <div className="w-full md:max-w-[300px]">
+                    <div className="w-full max-w-[200px] max-md:mx-auto md:max-w-[300px]">
                         <LazyImage
-                            src={generateTmdbImagePath(movie.poster_path)}
+                            src={generateTmdbImagePath(movie.poster_path, 200)}
                             alt={movie.title}
-                            width={500}
-                            height={750}
+                            width={200}
+                            height={300}
                             className="rounded-lg border-4 border-border/30"
                         />
                     </div>
