@@ -1,4 +1,6 @@
 'use client';
+import 'swiper/css';
+
 import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import LazyImage from './LazyImage';

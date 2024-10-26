@@ -1,6 +1,3 @@
-import 'swiper/css';
-
-import MovieCard from '@/components/MovieCard';
 import AddToWatchlistButton from '@/components/AddToWatchList';
 import LazyImage from '@/components/LazyImage';
 import MovieActorsSection from '@/components/MovieActorsSection';
@@ -12,6 +9,7 @@ import {
     getMovieRecommendations,
 } from '@/actions/movies';
 import { generateTmdbImagePath } from '@/lib/tmdb-image-path';
+import RecommendationSection from '@/components/RecommendationSection';
 
 export const revalidate = 60;
 export const dynamic = 'force-static';
@@ -99,14 +97,9 @@ export default async function MoviePage({
             </section>
             <div className="container space-y-8">
                 <MovieActorsSection cast={credits.cast} />
-                <div>
-                    <h2 className="text-2xl font-bold mb-4">Recommendations</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6">
-                        {recommendations.results.slice(0, 10).map((movie) => (
-                            <MovieCard key={movie.id} movie={movie} />
-                        ))}
-                    </div>
-                </div>
+                <RecommendationSection
+                    recommendations={recommendations.results}
+                />
             </div>
         </>
     );
