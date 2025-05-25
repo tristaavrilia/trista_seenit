@@ -7,7 +7,7 @@ const WatchlistPage = async () => {
 
     return (
         <div className="container py-8">
-            <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center">🎬🎬 Your Watchlist 🎬🎬</h1>
+            <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center">🎬 Your Watchlist 🎬</h1>
 
             {watchlist.length === 0 ? (
                 <div className="text-center text-gray-500 animate-pulse">

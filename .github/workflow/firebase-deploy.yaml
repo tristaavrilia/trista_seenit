@@ -1,4 +1,4 @@
-name: Deploy to Google Cloud Run
+name: CI/CD Firebase + GCP
 
 on:
   push:
@@ -27,25 +27,18 @@ jobs:
       - name: Build Project
         run: npm run build
 
+      # Deploy frontend to Firebase Hosting
+      - name: Deploy to Firebase Hosting
+        uses: w9jds/firebase-action@v13
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+      # Optional: Deploy backend (e.g., Cloud Functions or GCP services)
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
-
-      - name: Configure Docker Auth for Artifact Registry
-        run: gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev
-
-      - name: Build and Push Docker Image
-        run: |
-          docker build -t ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/YOUR-REPO/YOUR-IMAGE .
-          docker push ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/YOUR-REPO/YOUR-IMAGE
-
-      - name: Deploy to Cloud Run
-        run: |
-          gcloud run deploy YOUR-SERVICE \
-            --image ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/YOUR-REPO/YOUR-IMAGE \
-            --region ${{ secrets.GCP_REGION }} \
-            --platform managed \
-            --allow-unauthenticated

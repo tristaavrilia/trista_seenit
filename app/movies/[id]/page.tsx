@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import AddToWatchlistButton from '@/components/AddToWatchList';
 import LazyImage from '@/components/LazyImage';
 import MovieActorsSection from '@/components/MovieActorsSection';
@@ -23,15 +21,12 @@ interface Params {
 export const revalidate = 60;
 
 export const generateStaticParams = async () => {
-  try {
     const movies = await getMovies(1);
     return movies.map((movie) => ({
-      params: { id: movie.id.toString() },
+        params: {
+            id: movie.id.toString(),
+        },
     }));
-  } catch (error) {
-    console.error("❌ Failed to fetch movies:", error);
-    return []; // Biarkan kosong jika gagal, agar build tidak gagal
-  }
 };
 
 export const generateMetadata = async ({ params }: Params) => {
