@@ -15,25 +15,22 @@ import { getImageProps } from 'next/image';
 import ErrorMessage from '@/components/ErrorMessage';
 
 interface Params {
-  params: { id: string };
+    params: Promise<{ id: string }>;
 }
 
 export const revalidate = 60;
 
 export const generateStaticParams = async () => {
-  try {
     const movies = await getMovies(1);
     return movies.map((movie) => ({
-      id: movie.id.toString(),
+        params: {
+            id: movie.id.toString(),
+        },
     }));
-  } catch (error) {
-    console.error('Failed to fetch movies for static params:', error);
-    return []; // fallback to avoid build crash
-  }
 };
 
 export const generateMetadata = async ({ params }: Params) => {
-    const movieId = params.id;
+    const movieId = (await params).id;
 
     const movie = await getMovieDetails(movieId);
 
@@ -45,7 +42,7 @@ export const generateMetadata = async ({ params }: Params) => {
 };
 
 export default async function MoviePage({ params }: Params) {
-    const movieId = params.id;
+    const movieId = (await params).id;
 
     const [movie, credits, recommendations] = await Promise.all([
         getMovieDetails(movieId),

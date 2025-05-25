@@ -20,7 +20,7 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-        
+
       - name: Build Project
         run: npm run build
 
@@ -34,10 +34,19 @@ jobs:
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Deploy to Cloud Run using source
+      - name: Deploy Frontend to Cloud Run
         run: |
-          gcloud run deploy your-service-name \
+          gcloud run deploy ${{ secrets.GCP_CLOUD_RUN_SERVICE }} \
             --source=. \
             --region=${{ secrets.GCP_REGION }} \
             --platform=managed \
             --allow-unauthenticated
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Deploy Firebase Functions and Rules
+        run: |
+          firebase deploy --only functions,firestore,storage,auth \
+            --project ${{ secrets.GCP_PROJECT_ID }} \
+            --token "${{ secrets.FIREBASE_DEPLOY_TOKEN }}"
