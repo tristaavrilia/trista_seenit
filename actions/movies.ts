@@ -11,13 +11,37 @@ import { notFound } from 'next/navigation';
 const API_KEY = process.env.TMDB_API_KEY;
 
 export const getMovies = async (page: number): Promise<TMovie[]> => {
-    const res = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=${page}`,
-    );
+    try {
+        const res = await fetch(
+            `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=${page}`
+        );
 
-    if (!res.ok) throw new Error('Failed to fetch movies');
-    const data = await res.json();
-    return data.results as Promise<TMovie[]>;
+        if (!res.ok) {
+            console.error('Failed to fetch movies:', res.statusText);
+            return [];
+        }
+
+        const data = await res.json();
+        return data.results ?? [];
+    } catch (error) {
+        console.error('Fetch error in getMovies:', error);
+        return [];
+    }
+};
+
+export const generateStaticParams = async () => {
+    const movies = await getMovies(1);
+
+    if (!movies || movies.length === 0) {
+        console.warn('No movies found during generateStaticParams.');
+        return [];
+    }
+
+    return movies.map((movie) => ({
+        params: {
+            id: movie.id.toString(),
+        },
+    }));
 };
 
 export const searchMovies = async (query: string, page: number) => {

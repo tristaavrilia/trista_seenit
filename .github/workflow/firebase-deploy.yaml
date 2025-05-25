@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -20,6 +23,12 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+
+      - name: Run Linter
+        run: npm run lint
+
+      - name: Run Tests
+        run: npm test
 
       - name: Build Project
         run: npm run build

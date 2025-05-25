@@ -21,12 +21,17 @@ interface Params {
 export const revalidate = 60;
 
 export const generateStaticParams = async () => {
-    const movies = await getMovies(1);
-    return movies.map((movie) => ({
-        params: {
-            id: movie.id.toString(),
-        },
-    }));
+    try {
+        const movies = await getMovies(1);
+        return movies.map((movie) => ({
+            params: {
+                id: movie.id.toString(),
+            },
+        }));
+    } catch (error) {
+        console.error("generateStaticParams failed:", error);
+        return []; // return kosong agar build tidak gagal
+    }
 };
 
 export const generateMetadata = async ({ params }: Params) => {
