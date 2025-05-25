@@ -20,7 +20,6 @@ interface Params {
 
 export const revalidate = 60;
 
-// Return empty list if API fails to prevent build crash
 export const generateStaticParams = async () => {
     try {
         const movies = await getMovies(1);
@@ -33,7 +32,6 @@ export const generateStaticParams = async () => {
     }
 };
 
-// Return default metadata on failure
 export const generateMetadata = async ({ params }: Params) => {
     try {
         const movie = await getMovieDetails(params.id);
