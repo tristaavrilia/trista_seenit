@@ -18,6 +18,8 @@ interface Params {
     params: Promise<{ id: string }>;
 }
 
+const API_KEY = process.env.TMDB_API_KEY;
+
 export const revalidate = 60;
 
 export const generateStaticParams = async () => {
