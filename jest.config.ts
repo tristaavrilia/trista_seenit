@@ -1,16 +1,16 @@
 import type { Config } from 'jest';
-import { defaults } from 'ts-jest/presets';
 
 const config: Config = {
     preset: 'ts-jest',
     testEnvironment: 'jsdom',
-    setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-    moduleNameMapper: {
-        '^@/(.*)$': '<rootDir>/$1', // ✅ ini bagian penting
-    },
     transform: {
-        ...defaults.transform,
+        '^.+\\.(ts|tsx)$': 'ts-jest',
     },
+    moduleNameMapper: {
+        '^@/(.*)$': '<rootDir>/$1',
+    },
+    setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+    testPathIgnorePatterns: ['/node_modules/', '/.next/'],
 };
 
 export default config;
