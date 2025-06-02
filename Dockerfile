@@ -1,0 +1,39 @@
+# Stage 1: Build
+FROM node:lts-alpine AS builder
+
+WORKDIR /app
+
+# Salin file dependency dan install
+COPY package.json package-lock.json ./
+RUN npm ci
+
+# Salin seluruh source code dan build
+COPY . .
+RUN npm run build
+
+# Stage 2: Production
+FROM node:lts-alpine AS runner
+
+WORKDIR /app
+
+# Set NODE_ENV production
+ENV NODE_ENV=production
+
+# Install hanya dependencies produksi
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+
+# Salin hasil build dan config yang dibutuhkan
+COPY --from=builder /app/.next .next
+COPY --from=builder /app/public public
+COPY --from=builder /app/node_modules node_modules
+COPY --from=builder /app/package.json .
+COPY --from=builder /app/next.config.js .
+COPY --from=builder /app/tsconfig.json .
+COPY --from=builder /app/next-env.d.ts .
+
+# Port default untuk Cloud Run
+EXPOSE 3000
+
+# Start server
+CMD ["npx", "next", "start", "-p", "3000"]
