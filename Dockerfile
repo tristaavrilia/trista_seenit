@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Salin file dependency dan install
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --legacy-peer-deps
 
 # Salin seluruh source code dan build
 COPY . .
@@ -21,7 +21,7 @@ ENV NODE_ENV=production
 
 # Install hanya dependencies produksi
 COPY package.json package-lock.json ./
-RUN npm ci --legacy-peer-deps
+RUN npm ci --omit=dev
 
 # Salin hasil build dan config yang dibutuhkan
 COPY --from=builder /app/.next .next
