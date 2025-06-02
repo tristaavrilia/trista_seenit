@@ -14,7 +14,7 @@ export default function LoginGuard({
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser); // null jika belum login
+            setUser(currentUser);
         });
 
         return () => unsubscribe();
