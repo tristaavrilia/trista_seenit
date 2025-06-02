@@ -50,10 +50,10 @@ export const searchMovies = async (query: string, page: number) => {
     }
 
     const res = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`,
-        {
-            next: { revalidate: 60 },
-        },
+    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=${page}`,
+    {
+        next: { revalidate: 60 },
+    }
     );
 
     if (!res.ok) throw new Error('Failed to fetch movies');
