@@ -42,11 +42,11 @@ jobs:
         docker tag $IMAGE:$TAG $IMAGE:latest
         docker push $IMAGE:latest
 
-    # 6. Authenticate ke Google Cloud (tambahkan ini!)
+    # 6. Authenticate ke Google Cloud
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v1
       with:
-        credentials_json: ${{ secrets.GCP_SA_KEY }}
+        credentials_json: ${{ secrets.secrets.GCP_CREDENTIALS }}
 
     # 7. Setup Google Cloud SDK
     - name: Setup gcloud CLI
