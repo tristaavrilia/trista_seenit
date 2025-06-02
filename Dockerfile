@@ -39,4 +39,4 @@ COPY --from=builder /app/next-env.d.ts .
 EXPOSE 8080
 
 # Start server di port 8080
-CMD ["npx", "next", "start", "-p", "8080"]
+CMD ["npm", "start"]
