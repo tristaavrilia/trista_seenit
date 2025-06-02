@@ -21,7 +21,7 @@ ENV NODE_ENV=production
 
 # Install hanya dependencies produksi
 COPY package.json package-lock.json ./
-RUN npm ci --omit=dev
+RUN npm ci --omit=dev --legacy-peer-deps
 
 # Salin hasil build dan config yang dibutuhkan
 COPY --from=builder /app/.next .next
