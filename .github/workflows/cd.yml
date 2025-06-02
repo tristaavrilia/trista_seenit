@@ -40,8 +40,6 @@ jobs:
                   context: .
                   push: true
                   tags: ${{ secrets.DOCKERHUB_USERNAME }}/seenit:latest
-                  build-args: |
-                      TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
 
             - name: Authenticate to Google Cloud
               uses: google-github-actions/auth@v2
