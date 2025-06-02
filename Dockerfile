@@ -19,23 +19,22 @@ FROM node:lts-alpine
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV PORT=8080
 
-# Install only prod dependencies
+# Install only production dependencies
 COPY package.json package-lock.json ./
 RUN npm install --omit=dev
 
-# Copy build artifacts
+# Copy built artifacts
 COPY --from=builder /app/.next .next
 COPY --from=builder /app/public public
 COPY --from=builder /app/node_modules node_modules
 COPY --from=builder /app/package.json ./
-# COPY --from=builder /app/next.config.js ./
-COPY --from=builder /app/next-env.d.ts ./
+COPY --from=builder /app/next-env.d.ts ./ 
 COPY --from=builder /app/tsconfig.json ./
-# COPY --from=builder /app/src src
 
-# Expose port
-EXPOSE 3000
+# Expose correct port for Cloud Run
+EXPOSE 8080
 
-# Run Next.js
-CMD ["npx", "next", "start", "-p", "3000", "-H", "0.0.0.0"]
+# Run Next.js (listen on the PORT env var)
+CMD ["npm", "start"]
