@@ -32,7 +32,7 @@ COPY --from=builder /app/package.json ./
 # COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/next-env.d.ts ./
 COPY --from=builder /app/tsconfig.json ./
-COPY --from=builder /app/src src
+# COPY --from=builder /app/src src
 
 # Expose port
 EXPOSE 3000
