@@ -17,10 +17,9 @@ export default function LoginGuard({
             setUser(currentUser); // null jika belum login
         });
 
-        return () => unsubscribe(); // Cleanup listener
+        return () => unsubscribe();
     }, []);
 
-    // ✅ Menunggu auth state
     if (user === undefined) {
         return (
             <div className="flex justify-center items-center min-h-screen">
