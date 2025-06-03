@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getMovies } from '@/actions/movies'; // fungsi server yang pakai API key
+import { getMovies } from '@/actions/movies';
 
 export async function GET() {
     try {
