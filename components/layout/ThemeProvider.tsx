@@ -4,7 +4,13 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { ThemeProviderProps } from 'next-themes/dist/types';
 import { useEffect, useState } from 'react';
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+// Membuat versi readonly dari ThemeProviderProps
+type ReadonlyThemeProviderProps = Readonly<ThemeProviderProps>;
+
+export function ThemeProvider({
+    children,
+    ...props
+}: ReadonlyThemeProviderProps) {
     const [isMounted, setIsMounted] = useState<boolean>(false);
 
     useEffect(() => {
