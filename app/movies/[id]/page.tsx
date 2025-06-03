@@ -20,12 +20,12 @@ interface Params {
 
 export const revalidate = 60;
 
-export const dynamicParams = true;
-
 export const generateStaticParams = async () => {
-    const staticMovieIds = ['550', '299536', '424', '240', '299537'];
-    return staticMovieIds.map((id) => ({
-        id,
+    const movies = await getMovies(1);
+    return movies.map((movie) => ({
+        params: {
+            id: movie.id.toString(),
+        },
     }));
 };
 
