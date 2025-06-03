@@ -9,8 +9,10 @@ on:
 jobs:
     test:
         runs-on: ubuntu-latest
+
         steps:
-            - uses: actions/checkout@v4
+            - name: Checkout code
+              uses: actions/checkout@v4
 
             - name: Use Node.js
               uses: actions/setup-node@v4
@@ -22,6 +24,15 @@ jobs:
 
             - name: Run Linter
               run: npm run lint
+
+            - name: Run Tests
+              run: npm run test -- --passWithNoTests
+
+            - name: Cache SonarCloud packages
+              uses: actions/cache@v3
+              with:
+                  path: ~/.sonar/cache
+                  key: ${{ runner.os }}-sonar
 
             - name: SonarCloud Scan
               uses: SonarSource/sonarcloud-github-action@v1.10
