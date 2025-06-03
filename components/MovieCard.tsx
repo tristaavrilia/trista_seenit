@@ -5,13 +5,26 @@ import { TMovie } from '@/lib/schemas/movie-schemas';
 import { generateTmdbImagePath } from '@/lib/tmdb-image-path';
 
 const MovieCard = ({ movie }: { movie: TMovie }) => {
+    const posterSrc = movie.poster_path
+        ? generateTmdbImagePath(movie.poster_path, 200)
+        : '/fallback-poster.jpg'; // fallback poster jika tidak tersedia
+
+    const vote =
+        typeof movie.vote_average === 'number'
+            ? movie.vote_average.toFixed(1)
+            : 'N/A';
+
+    const releaseYear = movie.release_date
+        ? movie.release_date.split('-')[0]
+        : 'Unknown';
+
     return (
         <div className="group">
             <div className="aspect-[2/3] overflow-hidden rounded-lg">
                 <Link href={`/movies/${movie.id}`}>
                     <LazyImage
-                        src={generateTmdbImagePath(movie.poster_path, 200)}
-                        alt={movie.title}
+                        src={posterSrc}
+                        alt={movie.title || 'Untitled'}
                         width={210}
                         height={315}
                         quality={50}
@@ -22,20 +35,18 @@ const MovieCard = ({ movie }: { movie: TMovie }) => {
             </div>
             <Link href={`/movies/${movie.id}`}>
                 <h2 className="mt-2 text-sm leading-snug font-semibold">
-                    {movie.title}
+                    {movie.title || 'No Title'}
                 </h2>
                 <div className="flex gap-2 items-center">
                     <div className="flex gap-1 items-center">
                         <FaStar size={16} className="text-orange-500" />
-                        <p className="text-sm text-muted-foreground">
-                            {movie.vote_average.toFixed(1)}
-                        </p>
+                        <p className="text-sm text-muted-foreground">{vote}</p>
                     </div>
 
-                    <span className="size-1 bg-gray-500 rounded-full"></span>
+                    <span className="size-1 bg-gray-500 rounded-full" />
 
                     <p className="text-sm text-muted-foreground">
-                        {movie.release_date.split('-')[0]}
+                        {releaseYear}
                     </p>
                 </div>
             </Link>
