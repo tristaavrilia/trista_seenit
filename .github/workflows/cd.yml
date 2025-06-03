@@ -56,10 +56,3 @@ jobs:
                   region: ${{ secrets.GCP_REGION }}
                   project_id: ${{ secrets.GCP_PROJECT_ID }}
                   env_vars: TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
-
-            - name: SonarCloud Scan
-              uses: SonarSource/sonarcloud-github-action@v1.10
-              with:
-                  projectKey: devops-seenit
-                  organization: devops-seenit
-                  token: ${{ secrets.SONAR_TOKEN }}

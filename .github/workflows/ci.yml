@@ -22,3 +22,10 @@ jobs:
 
             - name: Run Linter
               run: npm run lint
+
+            - name: SonarCloud Scan
+              uses: SonarSource/sonarcloud-github-action@v1.10
+              with:
+                  projectKey: devops-seenit
+                  organization: devops-seenit
+                  token: ${{ secrets.SONAR_TOKEN }}
