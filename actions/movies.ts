@@ -49,7 +49,6 @@ export const getMovieDetails = async (id: string) => {
     try {
         return movieDetailsSchema.parse(data);
     } catch (error) {
-        // save the error to the server logs
         console.error('Movie details validation error:', error);
         throw new Error('Invalid movie data received from API');
     }
