@@ -40,7 +40,7 @@ export const searchMovies = async (query: string, page: number) => {
 
 export const getMovieDetails = async (id: string) => {
     const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_API_KEY}`,
+        `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`,
         { next: { revalidate: 60 } },
     );
     if (!res.ok) throw new Error('Failed to fetch movie details');
@@ -57,7 +57,7 @@ export const getMovieDetails = async (id: string) => {
 
 export const getMovieCredits = async (id: string) => {
     const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.TMDB_API_KEY}`,
+        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`,
         { next: { revalidate: 60 } },
     );
     if (!res.ok) throw new Error('Failed to fetch cast data');
@@ -74,7 +74,7 @@ export const getMovieCredits = async (id: string) => {
 
 export const getMovieRecommendations = async (id: string) => {
     const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.TMDB_API_KEY}`,
+        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${API_KEY}`,
         { next: { revalidate: 60 } },
     );
     if (!res.ok) throw new Error('Failed to fetch recommendations');
