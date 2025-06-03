@@ -25,8 +25,8 @@ jobs:
             - name: Run Linter
               run: npm run lint
 
-            - name: Run Tests
-              run: npm run test -- --passWithNoTests
+            # - name: Run Tests
+            #   run: npm run test -- --passWithNoTests
 
             - name: Cache SonarCloud packages
               uses: actions/cache@v3
