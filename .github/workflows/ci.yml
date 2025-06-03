@@ -7,12 +7,10 @@ on:
         branches: [main]
 
 jobs:
-    test:
+    sonar:
         runs-on: ubuntu-latest
-
         steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+            - uses: actions/checkout@v4
 
             - name: Use Node.js
               uses: actions/setup-node@v4
@@ -25,18 +23,12 @@ jobs:
             - name: Run Linter
               run: npm run lint
 
-            # - name: Run Tests
-            #   run: npm run test -- --passWithNoTests
-
-            - name: Cache SonarCloud packages
-              uses: actions/cache@v3
+            - name: SonarQube Scan
+              uses: SonarSource/sonarqube-scan-action@v5.0.0
+              env:
+                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
               with:
-                  path: ~/.sonar/cache
-                  key: ${{ runner.os }}-sonar
-
-            - name: SonarCloud Scan
-              uses: SonarSource/sonarcloud-github-action@v5.0.0
-              with:
-                  projectKey: devops-seenit
-                  organization: devops-seenit
-                  token: ${{ secrets.SONAR_TOKEN }}
+                  args: >
+                      -Dsonar.projectKey=devops-seenit
+                      -Dsonar.organization=devops-seenit
+                      -Dsonar.host.url=https://sonarcloud.io
