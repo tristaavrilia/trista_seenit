@@ -4,7 +4,10 @@ module.exports = {
     preset: 'ts-jest',
     testEnvironment: 'jsdom',
     transform: {
-        '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+        '^.+\\.(ts|tsx)$': [
+            'babel-jest',
+            { configFile: './babel.config.test.js' },
+        ],
     },
     setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
     collectCoverage: true,
