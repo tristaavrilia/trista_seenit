@@ -7,7 +7,7 @@ import { generateTmdbImagePath } from '@/lib/tmdb-image-path';
 const MovieCard = ({ movie }: { movie: TMovie }) => {
     const posterSrc = movie.poster_path
         ? generateTmdbImagePath(movie.poster_path, 200)
-        : '/fallback-poster.jpg'; // fallback poster jika tidak tersedia
+        : '/fallback-poster.jpg';
 
     const vote =
         typeof movie.vote_average === 'number'
