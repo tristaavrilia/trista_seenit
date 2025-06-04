@@ -9,16 +9,14 @@ module.exports = {
             { configFile: './babel.config.test.js' },
         ],
     },
-    testPathIgnorePatterns: [
-        '/node_modules/',
-        'babel.config.test.js', // abaikan file ini
-    ],
+    testPathIgnorePatterns: ['/node_modules/', 'babel.config.test.js'],
     setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
     collectCoverage: true,
     coverageDirectory: 'coverage',
     coverageReporters: ['lcov', 'text'],
     collectCoverageFrom: [
         'app/**/*.{ts,tsx}',
+        'components/**/*.{ts,tsx}',
         '!app/**/page.tsx',
         '!app/api/**',
         '!**/node_modules/**',
@@ -26,5 +24,6 @@ module.exports = {
     ],
     moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/$1',
+        '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
     },
 };
