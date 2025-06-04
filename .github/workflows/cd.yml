@@ -1,4 +1,4 @@
-name: Deploy to Cloud Run from Docker Hub
+name: CD
 
 on:
     push:
