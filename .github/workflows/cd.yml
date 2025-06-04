@@ -52,7 +52,7 @@ jobs:
               uses: google-github-actions/deploy-cloudrun@v2
               with:
                   service: seenit
-                  image: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/seenit:${{ github.sha }}
+                  image: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/seenit-feli:latest
                   region: ${{ secrets.GCP_REGION }}
                   project_id: ${{ secrets.GCP_PROJECT_ID }}
                   timeout: 900
