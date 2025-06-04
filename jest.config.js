@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    preset: 'ts-jest',
+    // preset: 'ts-jest',
     testEnvironment: 'jsdom',
     transform: {
         '^.+\\.(ts|tsx)$': [
