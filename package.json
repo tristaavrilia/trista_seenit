@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "next dev --turbopack",
         "build": "next build",
-        "start": "cross-env next start -p $PORT",
+        "start": "next start",
         "lint": "next lint",
         "shadcn": "npx shadcn add",
         "test": "jest --config jest.config.js",
