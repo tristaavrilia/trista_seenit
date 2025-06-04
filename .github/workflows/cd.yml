@@ -52,8 +52,8 @@ jobs:
               uses: google-github-actions/deploy-cloudrun@v2
               with:
                   service: seenit
-                  image: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/seenit:latest
+                  image: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/seenit:${{ github.sha }}
                   region: ${{ secrets.GCP_REGION }}
                   project_id: ${{ secrets.GCP_PROJECT_ID }}
-                  timeout: 600
+                  timeout: 900
                   env_vars: TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
