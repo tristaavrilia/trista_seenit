@@ -55,4 +55,4 @@ jobs:
                   image: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/seenit:latest
                   region: ${{ secrets.GCP_REGION }}
                   project_id: ${{ secrets.GCP_PROJECT_ID }}
-                  env_vars: TMDB_API_KEY=${{ secrets.TMDB_API_KEY }},PORT=8080
+                  env_vars: TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
