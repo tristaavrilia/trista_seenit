@@ -9,6 +9,10 @@ module.exports = {
             { configFile: './babel.config.test.js' },
         ],
     },
+    testPathIgnorePatterns: [
+        '/node_modules/',
+        'babel.config.test.js', // abaikan file ini
+    ],
     setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
     collectCoverage: true,
     coverageDirectory: 'coverage',

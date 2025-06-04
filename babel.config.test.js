@@ -1,7 +1,7 @@
 module.exports = {
     presets: [
-        'next/babel', // buat Next.js
-        '@babel/preset-typescript', // untuk TS
-        '@babel/preset-react', // untuk JSX/TSX React
+        'next/babel',
+        '@babel/preset-typescript',
+        ['@babel/preset-react', { runtime: 'automatic' }],
     ],
 };
