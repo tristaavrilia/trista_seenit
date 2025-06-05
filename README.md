@@ -133,7 +133,7 @@ https://seenit-656120882618.asia-southeast2.run.app
 
 ## License
 
-The project was forked from [https://github.com/Tajmirul/movies-tmdb] 
+The project was forked from https://github.com/Tajmirul/movies-tmdb 
 
 
 Thank you for checking out!
