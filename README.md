@@ -64,6 +64,10 @@ npm install --legacy-peer-deps
 TMDB_API_KEY=your_api_key_here
 ```
 
+You can obtain a TMDB API key by visiting:
+[TMDB API KEY](https://www.themoviedb.org/settings/api)
+
+
 5. Start the development server
 
 ```bash
