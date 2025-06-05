@@ -1,22 +1,25 @@
-# Movie Search and Details App
+# Project Descriptions
 
-This project is a responsive movie search and details application built using Next.js 15 and the TMDB API. It features a clean user interface, infinite scrolling for movie lists, and detailed movie information, including cast and recommendations.
+SeenIt adalah aplikasi web sederhana berbasis CRUD yang memungkinkan pengguna menyimpan dan mengelola daftar film favorit mereka secara mudah. Pengguna dapat menambahkan, melihat, mengedit, dan menghapus informasi film seperti judul, genre, tahun rilis, dan rating. Dalam pengembangannya, DevOps akan diterapkan melalui integrasi pipeline CI/CD untuk mempercepat proses deployment dan menjaga kualitas aplikasi secara berkelanjutan. 
 
 ## Table of Contents
 
 -   [Features](#features)
 -   [Setup Instructions](#setup-instructions)
--   [API Endpoints](#api-endpoints)
 -   [Live Demo](#live-demo)
 -   [License](#license)
 
 ## Features
 
--   Homepage with Infinite Scrolling: Displays a list of popular movies fetched from the TMDB API with infinite scrolling or a "Load More" button.
--   Search Functionality: Users can search for movies by title, displaying results with the same infinite scrolling behavior.
--   Movie Details Page: Utilizes Server-Side Rendering (SSR) with Incremental Static - Regeneration (ISR) to show detailed information about selected movies.
--   Watchlist Feature: Allows users to add or remove movies from their favorites or watchlist with optimistic UI, managed through server actions.
--   Dark Mode Toggle: Optional feature to switch between light and dark themes, persisting user preferences using cookies or localStorage.
+-   Home Page : Menampilkan daftar film populer yang diambil dari TMDB API.
+-   Fitur Search : Pengguna dapat mencari film berdasarkan judul atau kata kunci.
+-   Detail Page Film : Menggunakan Server-Side Rendering (SSR) dengan Incremental Static Regeneration (ISR) untuk menampilkan informasi detail tentang film yang dipilih.
+-   Fitur Watchlist : Memungkinkan pengguna untuk menambahkan atau menghapus film dari daftar favorit atau watchlist.
+-   Toggle Theme : Fitur opsional untuk beralih antara light mode dan dark mode.
+-   Register/Login : Mengharuskan pengguna untuk mendaftar/masuk dengan akun Email masing-masing.
+-   Fitur Rating & Review Film : Memungkinkan pengguna untuk memberikan rating dan review film yang sudah ditonton.
+-   History Page : Menampilkan riwayat film yang sudah ditonton dan diberi review oleh pengguna.
+-   Logout : Memungkinkan pengguna untuk keluar dari halaman web SeenIt.
 
 ## Setup Instructions
 
@@ -25,14 +28,20 @@ To run this project locally, follow these steps:
 -   Clone the repository:
 
 ```bash
-git clone https://github.com/Tajmirul/assignment-ngrk.git
-cd assignment-ngrk
+git clone https://github.com/feliciaeve/devops-seenit.git
+cd devops-seenit
 ```
 
 -   Install dependencies:
 
 ```bash
 npm install
+```
+
+or : 
+
+```bash
+npm install --legacy-peer-deps
 ```
 
 -   Create a .env.local file in the root directory and add your TMDB API key:
@@ -49,6 +58,28 @@ npm run dev
 
 -   Open your browser and navigate to http://localhost:3000.
 
+
+To run this project using Docker, follow these steps : 
+
+-   Clone the repository:
+
+```bash
+git clone https://github.com/feliciaeve/devops-seenit.git
+cd devops-seenit
+```
+
+-   Install dependencies:
+
+```bash
+npm install
+```
+
+or : 
+
+```bash
+npm install --legacy-peer-deps
+```
+
 ## API Endpoints
 
 The application interacts with the following TMDB API endpoints:
@@ -64,7 +95,7 @@ The application interacts with the following TMDB API endpoints:
 You can view the live application at:
 
 ```
-https://assignment-ngrk.vercel.app
+https://seenit-656120882618.asia-southeast2.run.app
 ```
 
 ## License
