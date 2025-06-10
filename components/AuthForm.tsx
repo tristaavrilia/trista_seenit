@@ -58,10 +58,14 @@ export default function AuthForm() {
                 )}
 
                 <div className="mb-4">
-                    <label className="block text-sm font-semibold mb-2 text-muted-foreground">
+                    <label
+                        htmlFor="email"
+                        className="block text-sm font-semibold mb-2 text-muted-foreground"
+                    >
                         Email
                     </label>
                     <input
+                        id="email"
                         className="bg-background border border-border rounded w-full py-2 px-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring focus:ring-primary"
                         type="email"
                         value={email}
@@ -72,10 +76,14 @@ export default function AuthForm() {
                 </div>
 
                 <div className="mb-6">
-                    <label className="block text-sm font-semibold mb-2 text-muted-foreground">
+                    <label
+                        htmlFor="password"
+                        className="block text-sm font-semibold mb-2 text-muted-foreground"
+                    >
                         Password
                     </label>
                     <input
+                        id="password"
                         className="bg-background border border-border rounded w-full py-2 px-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring focus:ring-primary"
                         type="password"
                         value={password}

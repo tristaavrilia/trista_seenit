@@ -25,5 +25,9 @@ module.exports = {
     moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/$1',
         '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+        '^swiper/css$': require.resolve('./__mocks__/styleMock.js'),
     },
+    transformIgnorePatterns: [
+        'node_modules/(?!(swiper)/)', // hanya transform 'swiper'
+    ],
 };
