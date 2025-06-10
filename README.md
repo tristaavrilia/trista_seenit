@@ -1,53 +1,121 @@
-# Movie Search and Details App
+# Project Descriptions
 
-This project is a responsive movie search and details application built using Next.js 15 and the TMDB API. It features a clean user interface, infinite scrolling for movie lists, and detailed movie information, including cast and recommendations.
+**SeenIt** is a simple web-based CRUD application that allows users to easily save and manage their favorite movies list. Users can add, view, edit, and delete movie information such as title, genre, release year, and rating.
+
+This project was created by :
+1. [Trista Avrilia](https://github.com/tristaavrilia)
+2. [Natasha Yosefani](https://github.com/natashayp)
+3. [Felicia Evelina](https://github.com/feliciaeve)
+4. [Gabriella Jessica](https://github.com/jessicaprawira)
+
+For further ReadMe Configuration, access [ReadMeDocumentation](https://docs.google.com/document/d/1GmmY0IYDoZJtSCq2BVYl8QxmrIkEi-r4kTgvxh6x9m0/edit?usp=sharing)
 
 ## Table of Contents
 
 -   [Features](#features)
 -   [Setup Instructions](#setup-instructions)
--   [API Endpoints](#api-endpoints)
 -   [Live Demo](#live-demo)
 -   [License](#license)
 
 ## Features
 
--   Homepage with Infinite Scrolling: Displays a list of popular movies fetched from the TMDB API with infinite scrolling or a "Load More" button.
--   Search Functionality: Users can search for movies by title, displaying results with the same infinite scrolling behavior.
--   Movie Details Page: Utilizes Server-Side Rendering (SSR) with Incremental Static - Regeneration (ISR) to show detailed information about selected movies.
--   Watchlist Feature: Allows users to add or remove movies from their favorites or watchlist with optimistic UI, managed through server actions.
--   Dark Mode Toggle: Optional feature to switch between light and dark themes, persisting user preferences using cookies or localStorage.
+-   Home Page : Displays a list of popular movies fetched from the TMDB API.
+-   Search Feature : Allows users to search for movies by title or keyword.
+-   Movie Detail Page : Uses Server-Side Rendering (SSR) with Incremental Static Regeneration (ISR) to show detailed information about the selected movie.
+-   Watchlist Feature : Enables users to add or remove movies from their favorites or watchlist.
+-   Theme Toggle : Optional feature to switch between light mode and dark mode.
+-   Register/Login : Requires users to register or log in with their email account.
+-   Rating & Review Feature : Allows users to give ratings and reviews for movies they have watched.
+-   History Page : Displays a history of movies the user has watched and reviewed.
+-   Logout : Allows users to sign out from the SeenIt web application.
 
 ## Setup Instructions
 
-To run this project locally, follow these steps:
+**To run this project locally, follow these steps:**
 
--   Clone the repository:
+1. Clone the repository
 
 ```bash
-git clone https://github.com/Tajmirul/assignment-ngrk.git
-cd assignment-ngrk
+git clone https://github.com/feliciaeve/devops-seenit.git
+cd devops-seenit
 ```
 
--   Install dependencies:
+2. Go to clone directory
+
+```bash
+cd devops-seenit
+```
+
+3. Install dependencies
 
 ```bash
 npm install
 ```
 
--   Create a .env.local file in the root directory and add your TMDB API key:
+  or : 
+
+```bash
+npm install --legacy-peer-deps
+```
+
+4. Create a .env.local file in the root directory and add your TMDB API key
 
 ```text
 TMDB_API_KEY=your_api_key_here
 ```
 
--   Start the development server:
+You can obtain a TMDB API key by visiting:
+[TMDB API KEY](https://www.themoviedb.org/settings/api)
+
+
+5. Start the development server
 
 ```bash
 npm run dev
 ```
 
--   Open your browser and navigate to http://localhost:3000.
+6. Open your browser and navigate to http://localhost:3000.
+
+
+**To run this project using Docker, follow these steps :** 
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/feliciaeve/devops-seenit.git
+```
+
+2. Go to clone directory
+
+```bash
+cd devops-seenit
+```
+
+3. Install dependencies
+
+```bash
+npm install
+```
+
+  or : 
+
+```bash
+npm install --legacy-peer-deps
+```
+
+4. Open the docker desktop
+   
+5. Build docker images
+
+```bash
+docker compose build —no-cache
+```
+
+6. Run the docker
+
+```bash
+docker compose up
+```
 
 ## API Endpoints
 
@@ -64,9 +132,12 @@ The application interacts with the following TMDB API endpoints:
 You can view the live application at:
 
 ```
-https://assignment-ngrk.vercel.app
+https://seenit-656120882618.asia-southeast2.run.app
 ```
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. Thank you for checking out my movie search and details app! I hope you enjoy exploring it as much as I enjoyed building it.
+The project was forked from https://github.com/Tajmirul/movies-tmdb 
+
+
+Thank you for checking out!
