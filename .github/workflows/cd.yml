@@ -5,14 +5,14 @@ on:
         branches: [main]
 
 jobs:
-    deploy:
+    build:
         runs-on: ubuntu-latest
-
-        env:
-            TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
-
+        outputs:
+            build_release: ${{ steps.create_release.outputs.release }}
         steps:
             - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
             - name: Setup Node.js
               uses: actions/setup-node@v4
@@ -35,6 +35,14 @@ jobs:
                   SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
                   SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
 
+    sentry-upload:
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
             - name: Upload Source Maps to Sentry
               uses: getsentry/sentry-upload-release@v1
               with:
@@ -42,15 +50,21 @@ jobs:
                   org: ${{ secrets.SENTRY_ORG }}
                   project: ${{ secrets.SENTRY_PROJECT }}
                   auth-token: ${{ secrets.SENTRY_AUTH_TOKEN }}
-                  release: ${{ steps.create_release.outputs.release }}
+                  release: ${{ needs.build.outputs.build_release }}
                   dist: 1
                   sourcemaps: ./.next/static/chunks
+
+    docker-build:
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - uses: actions/checkout@v4
 
             - name: Login to Docker Hub
               uses: docker/login-action@v3
               with:
                   username: ${{ secrets.DOCKERHUB_USERNAME }}
-                  password: ${{ secrets.DOCKERHUB_TOKEN}}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}
 
             - name: Setup Docker Buildx
               uses: docker/setup-buildx-action@v3
@@ -64,6 +78,10 @@ jobs:
                   build-args: |
                       TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
 
+    deploy:
+        runs-on: ubuntu-latest
+        needs: [docker-build, sentry-upload]
+        steps:
             - name: Authenticate to Google Cloud
               uses: google-github-actions/auth@v2
               with:
@@ -77,4 +95,6 @@ jobs:
                   region: ${{ secrets.GCP_REGION }}
                   project_id: ${{ secrets.GCP_PROJECT_ID }}
                   timeout: 900
-                  env_vars: TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
+                  env_vars: |
+                      TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
+                      SENTRY_RELEASE=${{ needs.build.outputs.build_release }}
