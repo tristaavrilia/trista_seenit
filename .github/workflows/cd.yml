@@ -35,7 +35,7 @@ jobs:
               with:
                   environment: production
                   ignore-missing: true
-                  version: ${{ github.sha }} # Manual version override agar release pasti valid
+                  version: ${{ github.sha }}
 
             - name: Install Sentry CLI
               run: curl -sL https://sentry.io/get-cli/ | bash
@@ -45,7 +45,7 @@ jobs:
                   SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
                   SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
                   SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
-                  SENTRY_RELEASE: ${{ steps.create_release.outputs.release }}
+                  SENTRY_RELEASE: ${{ github.sha }}
               run: |
                   sentry-cli releases files $SENTRY_RELEASE upload-sourcemaps --dist 1 --strip-prefix ./ --rewrite ./.next/static/chunks
 
