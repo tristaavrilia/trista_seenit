@@ -1,42 +1,41 @@
-name: CI branch
+name: CI Branch
 
 on:
-  push:
-    branches-ignore:
-      - main
+    push:
+        branches-ignore:
+            - main
 
 jobs:
-  test-and-create-pr:
-    runs-on: ubuntu-latest
+    test-and-pr:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
 
-      - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+            - name: Install dependencies
+              run: npm ci --legacy-peer-deps
 
-      - name: Run lint
-        run: npm run lint
+            - name: Run lint
+              run: npm run lint
 
-      - name: Run test
-        run: npm run test
+            - name: Run tests
+              run: npm run test
 
-      - name: Create Pull Request to main
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'Auto PR - CI passed'
-          branch: "auto-pr/${{ github.ref_name }}-${{ github.sha }}"
-          base: main
-          title: "Auto PR: ${{ github.ref_name }} → main"
-          body: |
-            CI passed on `${{ github.ref_name }}`. This PR was created automatically from commit `${{ github.sha }}`.
-          draft: false
-          push: true
-          create-branch: true
+            - name: Create Pull Request to main
+              uses: peter-evans/create-pull-request@v5
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  commit-message: 'Automated tests passed, creating PR to main'
+                  branch: ${{ github.ref_name }}-pr-to-main-${{ github.run_number }}
+                  base: main
+                  title: 'Auto PR: Merge `${{ github.ref_name }}` into main'
+                  body: |
+                      This PR was automatically created by CI after successful tests on branch `${{ github.ref_name }}`.
+                  draft: false
+                  labels: automated-pr
