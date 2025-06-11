@@ -2,7 +2,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import Header from './Header';
 import { useTheme } from 'next-themes';
 
-// Mock next/link agar tidak error saat test
 jest.mock('next/link', () => {
     return ({ children }: { children: React.ReactNode }) => children;
 });
