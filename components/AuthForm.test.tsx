@@ -5,7 +5,6 @@ import {
     createUserWithEmailAndPassword,
 } from 'firebase/auth';
 
-// Mock Firebase methods
 jest.mock('firebase/auth', () => ({
     signInWithEmailAndPassword: jest.fn(),
     createUserWithEmailAndPassword: jest.fn(),
