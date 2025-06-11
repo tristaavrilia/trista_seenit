@@ -33,6 +33,7 @@ jobs:
               uses: getsentry/action-release@v1
               with:
                   environment: production
+                  ignore-missing: true
               env:
                   SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
                   SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
