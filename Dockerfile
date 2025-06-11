@@ -11,6 +11,9 @@ RUN npm ci --legacy-peer-deps
 COPY . .
 RUN npm run build
 
+ARG TMDB_API_KEY
+ENV TMDB_API_KEY=$TMDB_API_KEY
+
 # Stage 2: Production
 FROM node:lts-alpine AS runner
 
