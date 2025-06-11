@@ -6,7 +6,6 @@ jest.mock('next/link', () => {
     return ({ children }: { children: React.ReactNode }) => children;
 });
 
-// Mock komponen SearchForm agar tidak ikut dirender (cukup placeholder)
 jest.mock('../forms/SearchForm', () => () => <div data-testid="search-form" />);
 
 // Mock komponen Logout agar tidak ikut dirender (cukup placeholder)
