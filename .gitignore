@@ -40,8 +40,8 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 
-firebase.ts
 # Sentry Config File
 .env.sentry-build-plugin
+
+next-env.d.ts

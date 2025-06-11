@@ -3,12 +3,12 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCtzxluD-670lfHCbbqweVayAPIx6CNe0o",
-  authDomain: "devops-trista.firebaseapp.com",
-  projectId: "devops-trista",
-  storageBucket: "devops-trista.firebasestorage.app",
-  messagingSenderId: "164514167755",
-  appId: "1:164514167755:web:04733beb62663b782d544e"
+    apiKey: 'AIzaSyAUG63U0dD4wPHKa0qrBU6DoQl7Jdr66Ak',
+    authDomain: 'devops-seenit.firebaseapp.com',
+    projectId: 'devops-seenit',
+    storageBucket: 'devops-seenit.firebasestorage.app',
+    messagingSenderId: '774547145117',
+    appId: '1:774547145117:web:467aa370e40ab12c836f74',
 };
 
 const app = initializeApp(firebaseConfig);
