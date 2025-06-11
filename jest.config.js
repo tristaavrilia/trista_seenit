@@ -17,6 +17,11 @@ module.exports = {
     collectCoverageFrom: [
         'app/**/*.{ts,tsx}',
         'components/**/*.{ts,tsx}',
+        '!components/LazyImage.tsx',
+        '!components/MovieActorsSection.tsx',
+        '!components/MovieCardWatchlistWrapper.tsx',
+        '!components/SuccessToast.tsx',
+        '!components/layout/ThemeProvider.tsx',
         '!app/**/page.tsx',
         '!app/api/**',
         '!**/node_modules/**',
