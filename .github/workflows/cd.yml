@@ -23,8 +23,6 @@ jobs:
               run: npm ci --legacy-peer-deps
 
             - name: Build Next.js App
-              env:
-                  TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
               run: npm run build
 
             - name: Create Sentry release
