@@ -1,5 +1,17 @@
 'use client';
 
+
+import * as Sentry from '@sentry/nextjs';
+import { useEffect } from 'react';
+
+export default function HomePage() {
+  useEffect(() => {
+    Sentry.captureException(new Error("🔥 Test error from browser"));
+  }, []);
+
+  return <h1>Test Sentry Page</h1>;
+}
+
 import { useEffect, useState } from 'react';
 import InfiniteMovies from '@/components/InfiniteMovies';
 import MovieCard from '@/components/MovieCard';
