@@ -51,8 +51,8 @@ jobs:
             - name: Deploy from Docker Hub to Cloud Run
               uses: google-github-actions/deploy-cloudrun@v2
               with:
-                  service: seenit-devops
-                  image: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/seenit-devops:latest
+                  service: devops-seenit
+                  image: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/devops-seenit:latest
                   region: ${{ secrets.GCP_REGION }}
                   project_id: ${{ secrets.GCP_PROJECT_ID }}
                   timeout: 900
