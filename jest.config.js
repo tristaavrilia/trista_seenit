@@ -23,6 +23,7 @@ module.exports = {
         '!components/SuccessToast.tsx',
         '!components/layout/ThemeProvider.tsx',
         '!app/**/page.tsx',
+        '!app/global-error.tsx',
         '!app/api/**',
         '!**/node_modules/**',
         '!**/.next/**',
