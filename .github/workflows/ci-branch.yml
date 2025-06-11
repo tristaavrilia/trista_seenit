@@ -39,7 +39,7 @@ jobs:
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
                   commit-message: 'Automated tests passed, creating PR to main'
-                  branch: branch: ${{ github.head_ref || github.ref_name }}
+                  branch: ${{ github.head_ref || github.ref_name }}
                   base: main
                   title: 'Auto PR: Merge `${{ github.head_ref || github.ref_name }}` into main'
                   body: |
