@@ -22,13 +22,13 @@ jobs:
             - name: Install dependencies
               run: npm ci --legacy-peer-deps
 
+            - name: Build Next.js App
+              run: npm run build
+
             - name: Checkout repository # add ini buat sentry
               uses: actions/checkout@v4
               with:
                 fetch-depth: 0  
-
-            - name: Build Next.js App
-              run: npm run build
 
             - name: Create Sentry release # add ini buat sentry
               uses: getsentry/action-release@v1
