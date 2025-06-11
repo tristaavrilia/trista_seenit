@@ -34,7 +34,7 @@ jobs:
                   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
               with:
                   args: >
-                      -Dsonar.projectKey=jessicaprawira_seenit-coba
+                      -Dsonar.projectKey=feliciaeve_devops-seenit
                       -Dsonar.organization=devops-seenit
                       -Dsonar.host.url=https://sonarcloud.io
                       -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
