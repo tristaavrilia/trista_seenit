@@ -7,6 +7,8 @@ on:
 jobs:
     deploy:
         runs-on: ubuntu-latest
+        outputs:
+            build_release: ${{ steps.create_release.outputs.release }}
         env:
             TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
 
@@ -35,9 +37,6 @@ jobs:
                   SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
                   SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
                   SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
-
-            - name: Debug release output
-              run: echo "Release: ${{ steps.create_release.outputs.release }}"
 
             - name: Upload Source Maps to Sentry
               uses: getsentry/sentry-upload-release@v1
