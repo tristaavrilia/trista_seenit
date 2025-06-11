@@ -44,10 +44,10 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'Automated tests passed, creating PR to main'
-          branch: auto-pr/${{ github.ref_name }}
+          commit-message: "Automated tests passed, creating PR to main"
+          branch: "auto-pr/${{ github.ref_name }}"
           base: main
-          title: Auto PR: Merge `${{ github.ref_name }}` into main
+          title: "Auto PR: Merge ${{ github.ref_name }} into main"
           body: |
             This PR was automatically created by CI after successful tests on branch `${{ github.ref_name }}`.
           draft: false
