@@ -27,14 +27,21 @@ jobs:
             - name: Run tests
               run: npm run test
 
+            - name: Debug ref
+              run: |
+                echo "REF: ${{ github.ref }}"
+                echo "REF_NAME: ${{ github.ref_name }}"
+                echo "HEAD_REF: ${{ github.head_ref }}"
+                echo "ACTOR: ${{ github.actor }}"
+
             - name: Create Pull Request to main
               uses: peter-evans/create-pull-request@v5
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
                   commit-message: 'Automated tests passed, creating PR to main'
-                  branch: ${{ github.ref_name }}-pr-to-main-${{ github.run_number }}
+                  branch: branch: ${{ github.head_ref || github.ref_name }}
                   base: main
-                  title: 'Auto PR: Merge `${{ github.ref_name }}` into main'
+                  title: 'Auto PR: Merge `${{ github.head_ref || github.ref_name }}` into main'
                   body: |
                       This PR was automatically created by CI after successful tests on branch `${{ github.ref_name }}`.
                   draft: false
