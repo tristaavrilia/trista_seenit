@@ -13,7 +13,7 @@ module.exports = {
     setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
     collectCoverage: true,
     coverageDirectory: 'coverage',
-    coverageReporters: ['lcov', 'text'],
+    coverageReporters: ['text', 'lcov'],
     collectCoverageFrom: [
         'app/**/*.{ts,tsx}',
         'components/**/*.{ts,tsx}',
