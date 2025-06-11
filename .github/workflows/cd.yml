@@ -7,10 +7,11 @@ on:
 jobs:
     deploy:
         runs-on: ubuntu-latest
-        outputs:
-            build_release: ${{ steps.create_release.outputs.release }}
         env:
             TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+            SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+            SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+            SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
 
         steps:
             - uses: actions/checkout@v4
@@ -28,20 +29,16 @@ jobs:
             - name: Build Next.js App
               run: npm run build
 
-            - name: Create Sentry release
+            - name: Create Sentry Release
               id: create_release
               uses: getsentry/action-release@v1
               with:
                   environment: production
                   ignore-missing: true
-              env:
-                  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-                  SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-                  SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+                  version: ${{ github.sha }} # Manual version override agar release pasti valid
 
             - name: Install Sentry CLI
-              run: |
-                  curl -sL https://sentry.io/get-cli/ | bash
+              run: curl -sL https://sentry.io/get-cli/ | bash
 
             - name: Upload Source Maps to Sentry
               env:
@@ -56,7 +53,7 @@ jobs:
               uses: docker/login-action@v3
               with:
                   username: ${{ secrets.DOCKERHUB_USERNAME }}
-                  password: ${{ secrets.DOCKERHUB_TOKEN}}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}
 
             - name: Setup Docker Buildx
               uses: docker/setup-buildx-action@v3
