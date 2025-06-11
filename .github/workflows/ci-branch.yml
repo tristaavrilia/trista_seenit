@@ -4,6 +4,12 @@ on:
     push:
         branches-ignore:
             - main
+    create:
+        branches:
+            - '**'
+    pull_request:
+        branches:
+            - main
 
 jobs:
     test-and-pr:
@@ -39,10 +45,12 @@ jobs:
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
                   commit-message: 'Automated tests passed, creating PR to main'
-                  branch: ${{ github.head_ref || github.ref_name }}
+                  branch: ${{ github.ref_name }}-pr
                   base: main
-                  title: 'Auto PR: Merge `${{ github.head_ref || github.ref_name }}` into main'
+                  title: 'Auto PR: Merge `${{ github.ref_name }}` into main'
                   body: |
                       This PR was automatically created by CI after successful tests on branch `${{ github.ref_name }}`.
                   draft: false
                   labels: automated-pr
+                  push: true
+                  create-branch: true
