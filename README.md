@@ -185,7 +185,7 @@ The application interacts with the following TMDB API endpoints:
 You can view the live application at:
 
 ```
-[app seenit](https://seenit-devops-656120882618.asia-southeast2.run.app)
+https://seenit-devops-656120882618.asia-southeast2.run.app
 ```
 
 ## License
